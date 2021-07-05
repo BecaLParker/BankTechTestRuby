@@ -16,6 +16,10 @@ Scenario | Intended code behaviour
 Withdrawal amount is greater than current balance | Allow account to become overdrawn (i.e. balance can be negative)
 Another scenario... | Design decision
 
+## Planned domain interaction model
+![Domain Model for Bank Tech Test](./planning/domain_model.svg)
+
+
 ## Setup
 1. Clone this repo by typing/copying this code snippet into your terminal:   
 `git clone https://github.com/BecaLParker/BankTechTestRuby.git`
