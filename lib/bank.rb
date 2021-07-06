@@ -12,7 +12,7 @@ class Bank
 
   def print_statement(account_id)
     puts header
-    puts get_account(account_id).statement
+    puts get_account(account_id).statement.reverse
   end
 
   def deposit(account_id, date, amount)

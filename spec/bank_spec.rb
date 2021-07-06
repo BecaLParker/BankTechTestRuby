@@ -39,4 +39,18 @@ describe Bank do
       end
     end
   end
+
+  context 'With multiple prior deposits to account' do
+    describe '#print_statement' do
+      it 'output shows the deposits logged correctly under header' do
+        account = Account.new(1)
+        account.credit('10/01/2012', 1000.00)
+        account.credit('13/01/2012', 2000.00)
+        bank = Bank.new([account])
+        expect { bank.print_statement(1) }.to output(
+          "date || credit || debit || balance\n13/01/2012 || 2000.00 || || 3000.00\n10/01/2012 || 1000.00 || || 1000.00\n"
+        ).to_stdout
+      end
+    end
+  end
 end
