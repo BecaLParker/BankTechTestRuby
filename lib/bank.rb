@@ -7,7 +7,8 @@ require_relative 'calendar'
 class Bank
   attr_reader :accounts
 
-  def initialize(accounts)
+  def initialize(calendar = Calendar.new, accounts)
+    @calendar = calendar
     @accounts = Hash[accounts.map { |account| [account.account_id, account] }]
   end
 
@@ -17,7 +18,7 @@ class Bank
   end
 
   def deposit(account_id, amount)
-    get_account(account_id).credit('Integrate with Calendar class', amount)
+    get_account(account_id).credit(transaction_date, amount)
   end
 
   private
@@ -28,5 +29,9 @@ class Bank
 
   def get_account(account_id)
     @accounts[account_id]
+  end
+
+  def transaction_date
+    @calendar.date
   end
 end
