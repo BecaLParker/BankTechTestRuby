@@ -18,6 +18,14 @@ describe Bank do
     end
   end
 
+  describe '#withdraw' do
+    subject { Bank.new([Account.new(5), Account.new, Account.new(6)]) }
+    it 'calls specified account to debit the amount' do
+      expect { subject.withdraw(6, '01/04/2020', 10.00) }.to change { subject.accounts[6].balance }.from(0).to(-10.00)
+      expect { subject.withdraw(6, '01/04/2020', 10.00) }.not_to change { subject.accounts[5].balance }
+    end
+  end
+
   context 'With no prior transactions on account' do
     describe '#print_statement' do
       subject { Bank.new([Account.new(1)]) }

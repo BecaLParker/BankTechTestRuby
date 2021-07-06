@@ -49,8 +49,8 @@ Run RSPEC
 
 
 - To make a withdrawal:  
-`code to type in terminal`  
-=> [example output]
+`bank.withdraw(1000, "06/07/2020", 10.00)`  (where 1000 is the account_id, followed by date as a string, followed by the amount to withdraw)
+
 
 - To print account statement:  
 `bank.print_statement(1000)` (where 1000 is the account_id)  

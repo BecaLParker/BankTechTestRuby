@@ -19,6 +19,10 @@ class Bank
     get_account(account_id).credit(date, amount)
   end
 
+  def withdraw(account_id, date, amount)
+    get_account(account_id).debit(date, amount)
+  end
+
   private
 
   def header
