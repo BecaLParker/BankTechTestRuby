@@ -16,6 +16,10 @@ class Bank
     puts get_account(account_id).statement
   end
 
+  def deposit(account_id, amount)
+    get_account(account_id).credit('Integrate with Calendar class', amount)
+  end
+
   private
 
   def header
