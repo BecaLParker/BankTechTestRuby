@@ -33,12 +33,11 @@ Another scenario... | Design decision
 ### How to run my tests
 Run RSPEC  
 `rspec`
-=> [example output]
+
 
 ### How to interact as a user
-First load the code to IRB  
-`code to type in terminal`  
-=> [example output]
+First load the code to IRB : `irb -r './lib/bank.rb'`  
+Then initialize the bank object: `bank = Bank.new`
 
 - To make a deposit:  
 `code to type in terminal`  
@@ -49,14 +48,15 @@ First load the code to IRB
 => [example output]
 
 - To print account statement:  
-`code to type in terminal`  
-=> [example output]
+`bank.print_statement(1)` (where 1 is the account_id)  
+=> date || credit || debit || balance
+=> 
 
 
 
 
 ## Aims
-This task is about producing the best code you I can when there is a minimal time pressure.
+This task is about producing the best code I can when there is a minimal time pressure.
  - practice my OO design and TDD skills.
  - working independently 
  - practice reflecting on and improving my own work.
