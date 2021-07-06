@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'account'
-require_relative 'calendar'
 
 # Responsible for user-account interaction logic
 class Bank
@@ -16,8 +15,8 @@ class Bank
     puts get_account(account_id).statement
   end
 
-  def deposit(account_id, amount)
-    get_account(account_id).credit('Integrate with Calendar class', amount)
+  def deposit(account_id, date, amount)
+    get_account(account_id).credit(date, amount)
   end
 
   private

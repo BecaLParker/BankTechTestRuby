@@ -14,7 +14,7 @@ I encountered edgecases and scenario considerations which were not covered by th
 Scenario | Intended code behaviour
 ---------|------------------------
 Withdrawal amount is greater than current balance | Allow account to become overdrawn (i.e. balance can be negative)
-Requirements do not specify whether transaction date should be input by user or auto-generated | Code will provide transaction date. 
+Requirements do not specify whether transaction date should be input by user or auto-generated | User to supply transaction date. Code to implement an auto-generated date is WIP on branch "Calendar" of this repo.
 A bank might reasonably have many accounts, and a user might have many accounts at the same bank | The user must specify the account (i.e. user must know their account_id) in order to perform transactions
 User provides an incorrect account_id that is not present | Throw an error
 User provides an incorrect account_id that happens to exist | Transaction will proceed - this incurs the risk that users can make transactions on the wrong account through human error. If this is a concern, code could be changed to require a password or other verification before allowing access to an account.
@@ -45,8 +45,8 @@ Run RSPEC
 1. Then initialize the bank object, passing it an array containing the account object/s you've made: `bank = Bank.new([account])`
 
 - To make a deposit:  
-`code to type in terminal`  
-=> [example output]
+`bank.deposit(1000, "06/07/2020", 10.00)`  (where 1000 is the account_id, followed by date as a string, followed by the amount to deposit) 
+
 
 - To make a withdrawal:  
 `code to type in terminal`  
