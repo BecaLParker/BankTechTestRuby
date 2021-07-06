@@ -19,8 +19,8 @@ class Account
   def debit(transaction_date, amount)
     @balance -= amount
     @transaction_log.push("#{transaction_date} || || #{format('%.2f', amount)} || #{format('%.2f', @balance)}")
-  end 
-  
+  end
+
   def statement
     @transaction_log
   end

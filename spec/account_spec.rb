@@ -22,13 +22,13 @@ describe Account do
     end
 
     it 'allows negative balance' do
-      expect { subject.debit('02/01/2020', 10.00) }.to change { subject.balance }.from(0).to(-10.00) 
+      expect { subject.debit('02/01/2020', 10.00) }.to change { subject.balance }.from(0).to(-10.00)
     end
 
     it 'updates transaction log' do
       expect { subject.debit('01/01/2020', 10.00) }.to change {
-                                                          subject.transaction_log
-                                                        }.from([]).to(['01/01/2020 || || 10.00 || -10.00'])
+                                                         subject.transaction_log
+                                                       }.from([]).to(['01/01/2020 || || 10.00 || -10.00'])
     end
   end
 

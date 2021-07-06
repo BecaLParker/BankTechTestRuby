@@ -53,4 +53,31 @@ describe Bank do
       end
     end
   end
+
+  context 'With one prior withdrawal from account' do
+    describe '#print_statement' do
+      it 'output shows the withdrawl logged under header' do
+        account = Account.new(1)
+        account.debit('10/01/2012', 1000.00)
+        bank = Bank.new([account])
+        expect { bank.print_statement(1) }.to output(
+          "date || credit || debit || balance\n10/01/2012 || || 1000.00 || -1000.00\n"
+        ).to_stdout
+      end
+    end
+  end
+
+  context 'With multiple prior withdrawals from account' do
+    describe '#print_statement' do
+      it 'output shows the withdrawals logged correctly under header' do
+        account = Account.new(1)
+        account.debit('10/01/2012', 1000.00)
+        account.debit('12/01/2012', 1.00)
+        bank = Bank.new([account])
+        expect { bank.print_statement(1) }.to output(
+          "date || credit || debit || balance\n12/01/2012 || || 1.00 || -1001.00\n10/01/2012 || || 1000.00 || -1000.00\n"
+        ).to_stdout
+      end
+    end
+  end
 end
