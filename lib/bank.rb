@@ -4,6 +4,12 @@ require_relative 'calendar.rb'
 # Responsible for user-account interaction logic
 class Bank
   def print_statement(account_id)
-    puts "date || credit || debit || balance"
+    puts header
+  end
+
+  private
+
+  def header
+    "date || credit || debit || balance"
   end
 end
