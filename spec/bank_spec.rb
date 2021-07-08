@@ -9,6 +9,9 @@ describe Bank do
   end
 
   describe '#deposit' do
+    it 'throws error when amount is <= 0' do
+      expect { subject.deposit('04/04/2000', 0) }.to raise_error('Transaction must be greater than 0')
+    end
     it 'stores a credit transaction' do
       expect { subject.deposit('01/04/2020', 10.00) }.to change {
                                                            subject.transactions
@@ -17,6 +20,9 @@ describe Bank do
   end
 
   describe '#withdraw' do
+    it 'throws error when amount is <= 0' do
+      expect { subject.withdraw('04/04/2000', 0) }.to raise_error('Transaction must be greater than 0')
+    end
     it 'stores a debit transaction' do
       expect { subject.withdraw('02/04/2020', 20.00) }.to change {
                                                             subject.transactions

@@ -16,10 +16,14 @@ class Bank
   end
 
   def deposit(date, amount)
+    raise 'Transaction must be greater than 0' if amount <= 0
+
     @transactions << [date, amount]
   end
 
   def withdraw(date, amount)
+    raise 'Transaction must be greater than 0' if amount <= 0
+
     @transactions << [date, -amount]
   end
 end
