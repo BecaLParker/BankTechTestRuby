@@ -1,39 +1,29 @@
 # frozen_string_literal: true
 
-require_relative 'account'
+require_relative 'printer'
 
 # Responsible for user-account interaction logic
 class Bank
-  attr_reader :accounts
+  attr_reader :transactions
 
-  def initialize(accounts)
-    @accounts = Hash[accounts.map { |account| [account.account_id, account] }]
+  def initialize(printer = Printer.new)
+    @printer = printer
+    @transactions = []
   end
 
-  def print_statement(account_id)
-    puts header
-    puts get_account(account_id).statement.reverse
+  def print_statement
+    @printer.print(@transactions)
   end
 
-  def deposit(account_id, date, amount)
-    raise 'Account not found' if @accounts.key?(account_id) == false
+  def deposit(date, amount)
+    raise 'Transaction must be greater than 0' if amount <= 0
 
-    get_account(account_id).credit(date, amount)
+    @transactions << [date, amount]
   end
 
-  def withdraw(account_id, date, amount)
-    raise 'Account not found' if @accounts.key?(account_id) == false
+  def withdraw(date, amount)
+    raise 'Transaction must be greater than 0' if amount <= 0
 
-    get_account(account_id).debit(date, amount)
-  end
-
-  private
-
-  def header
-    'date || credit || debit || balance'
-  end
-
-  def get_account(account_id)
-    @accounts[account_id]
+    @transactions << [date, -amount]
   end
 end
