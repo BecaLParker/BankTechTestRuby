@@ -31,7 +31,7 @@ describe Printer do
     end
   end
 
-  context 'With one prior withdrawal from account' do
+  context 'With one prior withdrawal' do
     describe '#print' do
       it 'output shows the withdrawal logged under header' do
         expect { subject.print([['10/01/2012', -1000.00]]) }.to output(
@@ -41,17 +41,13 @@ describe Printer do
     end
   end
 
-  # context 'With multiple prior withdrawals from account' do
-  #   describe '#print_statement' do
-  #     it 'output shows the withdrawals logged correctly under header' do
-  #       account = Account.new(1)
-  #       bank = Bank.new([account])
-  #       bank.withdraw(1, '10/01/2012', 1000.00)
-  #       bank.withdraw(1, '12/01/2012', 1.00)
-  #       expect { bank.print_statement(1) }.to output(
-  #         "date || credit || debit || balance\n12/01/2012 || || 1.00 || -1001.00\n10/01/2012 || || 1000.00 || -1000.00\n"
-  #       ).to_stdout
-  #     end
-  #   end
-  # end
+  context 'With multiple prior withdrawals' do
+    describe '#print' do
+      it 'output shows the withdrawals logged correctly under header' do
+        expect { subject.print([['10/01/2012', -1000.00], ['12/01/2012', -1.00]]) }.to output(
+          "date || credit || debit || balance\n12/01/2012 || || 1.00 || -1001.00\n10/01/2012 || || 1000.00 || -1000.00\n"
+        ).to_stdout
+      end
+    end
+  end
 end
