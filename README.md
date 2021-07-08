@@ -2,7 +2,7 @@
 Ruby repo for Makers Week 10 individual tech test
 
 ## What does this code do?
-Emulates a banking system. Users can interact in IRB to perform the following tasks on an account:
+Emulates a banking system. User can interact in IRB to perform the following tasks:
   - make deposits
   - make withdrawals
   - print statement    
@@ -14,10 +14,9 @@ I encountered edgecases and scenario considerations which were not covered by th
 Scenario | Intended code behaviour
 ---------|------------------------
 Withdrawal amount is greater than current balance | Allow account to become overdrawn (i.e. balance can be negative)
+User enters a transaction amount <= 0 | Throw an error, do not store the transaction
 Requirements do not specify whether transaction date should be input by user or auto-generated | User to supply transaction date. However, this relies on a compliant user. Code to implement an auto-generated date is WIP on branch "Calendar" of this repo.
-A bank might reasonably have many accounts, and a user might have many accounts at the same bank | The user must specify the account (i.e. user must know their account_id) in order to perform transactions
-User provides an incorrect account_id that is not present | Throw an error
-User provides an incorrect account_id that happens to exist | Transaction will proceed - this incurs the risk that users can make transactions on the wrong account through human error. If this is a concern, code could be changed to require a password or other verification before allowing access to an account.
+
 
 ## Planned domain interaction model
 ![Domain Model for Bank Tech Test](./planning/domain_model.svg)
@@ -40,20 +39,19 @@ Run RSPEC
 
 ### How to interact as a user
 1. First load the code to IRB : `irb -r './lib/bank.rb'`  
-2. Create at least one account : `account = Account.new`, and take note of the `@account_id` from the returned object (you will need this to run transactions on the account)  
-> In a real-life scenario, assume the user would have an existing account and know the account_id number.  
-1. Then initialize the bank object, passing it an array containing the account object/s you've made: `bank = Bank.new([account])`
+  
+2. Then initialize the bank object `bank = Bank.new`
 
 - To make a deposit:  
-`bank.deposit(1000, "06/07/2020", 10.00)`  (where 1000 is the account_id, followed by date as a string, followed by the amount to deposit) 
+`bank.deposit("06/07/2020", 10.00)`  (pass in date as a string, followed by the amount to deposit) 
 
 
 - To make a withdrawal:  
-`bank.withdraw(1000, "06/07/2020", 10.00)`  (where 1000 is the account_id, followed by date as a string, followed by the amount to withdraw)
+`bank.withdraw("06/07/2020", 10.00)`  (pass in date as a string, followed by the amount to withdraw)
 
 
-- To print account statement:  
-`bank.print_statement(1000)` (where 1000 is the account_id)  
+- To print statement:  
+`bank.print_statement`   
 => date || credit || debit || balance  
 => 
 
