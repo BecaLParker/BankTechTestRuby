@@ -9,10 +9,8 @@ describe Bank do
   end
 
   describe '#deposit' do
-    subject { Bank.new([Account.new(3), Account.new, Account.new(4)]) }
-    it 'calls specified account to credit the amount' do
-      expect { subject.deposit(4, '01/04/2020', 10.00) }.to change { subject.accounts[4].balance }.from(0).to(10.00)
-      expect { subject.deposit(4, '01/04/2020', 10.00) }.not_to change { subject.accounts[3].balance }
+    it 'stores a credit transaction' do
+      expect { subject.deposit('01/04/2020', 10.00) }.to change { subject.transactions }.from([]).to([['01/04/2020', 10.00]])
     end
 
     it 'fails when account is not present' do
