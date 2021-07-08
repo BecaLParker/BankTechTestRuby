@@ -16,14 +16,15 @@ class Printer
 
   def body(transactions)
     balance = 0
-
+    lines = []
     transactions.each do |transaction|
       balance += transaction[1]
-      if (transaction[1]).positive?
-        return "#{transaction[0]} || #{'%.2f' % transaction[1]} || || #{'%.2f' % balance}"
-      else
-        return "#{transaction[0]} || || #{'%.2f' % transaction[1].abs} || #{'%.2f' % balance}"
-      end
+      lines << if (transaction[1]).positive?
+                 "#{transaction[0]} || #{'%.2f' % transaction[1]} || || #{'%.2f' % balance}"
+               else
+                 "#{transaction[0]} || || #{'%.2f' % transaction[1].abs} || #{'%.2f' % balance}"
+               end
     end
+    lines.reverse
   end
 end
