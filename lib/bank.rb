@@ -17,10 +17,8 @@ class Bank
     @transactions << [date, amount]
   end
 
-  def withdraw(account_id, date, amount)
-    raise 'Account not found' if @accounts.key?(account_id) == false
-
-    get_account(account_id).debit(date, amount)
+  def withdraw(date, amount)
+    @transactions << [date, -amount]
   end
 
   private

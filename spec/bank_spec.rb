@@ -10,23 +10,17 @@ describe Bank do
 
   describe '#deposit' do
     it 'stores a credit transaction' do
-      expect { subject.deposit('01/04/2020', 10.00) }.to change { subject.transactions }.from([]).to([['01/04/2020', 10.00]])
-    end
-
-    it 'fails when account is not present' do
-      expect { subject.deposit(0, '01/04/2020', 10.00) }.to raise_error('Account not found')
+      expect { subject.deposit('01/04/2020', 10.00) }.to change {
+                                                           subject.transactions
+                                                         }.from([]).to([['01/04/2020', 10.00]])
     end
   end
 
   describe '#withdraw' do
-    subject { Bank.new([Account.new(5), Account.new, Account.new(6)]) }
-    it 'calls specified account to debit the amount' do
-      expect { subject.withdraw(6, '01/04/2020', 10.00) }.to change { subject.accounts[6].balance }.from(0).to(-10.00)
-      expect { subject.withdraw(6, '01/04/2020', 10.00) }.not_to change { subject.accounts[5].balance }
-    end
-
-    it 'fails when account is not present' do
-      expect { subject.withdraw(0, '01/04/2020', 10.00) }.to raise_error('Account not found')
+    it 'stores a debit transaction' do
+      expect { subject.withdraw('02/04/2020', 20.00) }.to change {
+                                                            subject.transactions
+                                                          }.from([]).to([['02/04/2020', -20.00]])
     end
   end
 
