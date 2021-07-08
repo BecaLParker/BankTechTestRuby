@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'account'
-
 # Responsible for user-account interaction logic
 class Bank
-  attr_reader :accounts
+  attr_reader :transactions
 
-  def initialize(accounts)
-    @accounts = Hash[accounts.map { |account| [account.account_id, account] }]
+  def initialize
+    @transactions = []
   end
 
   def print_statement(account_id)

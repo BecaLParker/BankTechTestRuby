@@ -3,11 +3,9 @@
 require 'bank'
 
 describe Bank do
-  subject { Bank.new([Account.new(1), Account.new(2), Account.new]) }
-  it 'stores account objects in a hash for access by key' do
-    expect(subject.accounts).to be_instance_of Hash
-    expect(subject.accounts[1]).to be_instance_of Account
-    expect(subject.accounts.key?(2)).to be true
+  it 'starts with no transactions' do
+    expect(subject.transactions).to be_instance_of Array
+    expect(subject.transactions.empty?).to be true
   end
 
   describe '#deposit' do
